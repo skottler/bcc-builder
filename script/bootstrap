@@ -4,6 +4,29 @@ set -e
 
 KERNEL_VERSION="4.9.0-0.bpo.2-amd64"
 LINUX_BASE_VERSION="4.3~bpo8+1"
+AGENT_USER="buildkite-agent"
+
+echo "Installing and configuring docker..."
+
+apt-get -y install \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg2 \
+  software-properties-common
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) \
+  stable"
+
+apt-get update
+apt-get install -y docker-ce
+sudo usermod -aG docker ${AGENT_USER}
+
+echo "Installing and configuring a newer kernel..."
 
 if [ "$(uname -r)" == "${KERNEL_VERSION}" ]; then
   echo "The ${KERNEL_VERSION} kernel is already running. Nothing to do."
