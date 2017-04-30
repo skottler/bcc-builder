@@ -35,3 +35,5 @@ apt-get update
 apt-get install -y linux-image-${KERNEL_VERSION}
 apt-get install -y linux-headers-${KERNEL_VERSION}
 apt-get install -y linux-base=${LINUX_BASE_VERSION}
+
+echo "The ${KERNEL_VERSION} kernel has been installed. Reboot the host to use the new kernel"
