@@ -13,7 +13,7 @@ fi
 HIERARCHY_COUNT=$(cat /proc/1/cgroup | cut -d: -f3 | uniq | wc -l)
 
 if [[ $HIERARCHY_COUNT -gt 1 ]]; then
-  echo "Bootstrap is intended to run on the build host, not inside a container"
+  echo "Bootstrap is intended to run on the build host, not inside a container."
   exit 1
 fi
 
@@ -36,4 +36,4 @@ apt-get install -y linux-image-${KERNEL_VERSION}
 apt-get install -y linux-headers-${KERNEL_VERSION}
 apt-get install -y linux-base=${LINUX_BASE_VERSION}
 
-echo "The ${KERNEL_VERSION} kernel has been installed. Reboot the host to use the new kernel"
+echo "The ${KERNEL_VERSION} kernel has been installed. Reboot the host to use the new kernel."
